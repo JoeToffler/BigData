@@ -1,0 +1,22 @@
+server:
+  port: 5000
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:mysql://192.168.101.63:3306/pasq_dev?useLegacyDatetimeCode=false&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    username: hxzh
+    password: 1Q2w3e4r5t!@
+    initialization-mode: never
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect  ## org.hibernate.dialect.MySQL5InnoDBDialect
+      format_sql: false
+    show_sql: true
+  data:
+    mongodb:
+      uri: mongodb://192.168.101.58:27017/pasq
