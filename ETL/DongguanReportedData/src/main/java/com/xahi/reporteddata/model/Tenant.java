@@ -107,4 +107,50 @@ public class Tenant implements Serializable {
     @Column(name = "emery_phone", length = 20)
     private String emeryPhone;
 
+    /**
+     * 新增字段
+     */
+
+    /**
+     * 国籍
+     */
+    @Column(name = "nationality",length = 50)
+    private String nationality;
+
+    /**
+     * 证件类型
+     */
+    @Column(name = "id_type",length = 50)
+    private String idType;
+
+    /**
+     * 单位名称
+     */
+    @Column(name = "company_name",length = 100)
+    private String companyName;
+
+    /**
+     * 居住方式
+     */
+    @Column(name = "live_mode",length = 1)
+    private String liveMode;
+
+    /**
+     * 人口类别
+     */
+    @Column(name = "population_type",length = 64)
+    private String populationType;
+
+    /**
+     * 是否居住登记
+     */
+    @Column(name = "domicile_registration",length = 64)
+    private String domicileRegistration;
+
+    /**
+     * 与房屋所有人关系
+     */
+    @Column(name = "homeowners_relationship")
+    private String homeownersRelationship;
+
 }

@@ -1,5 +1,7 @@
 package com.xahi.reporteddata.dto;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
@@ -11,11 +13,13 @@ import javax.validation.constraints.Size;
  * @date 2019-09-11 11:31
  */
 @Setter
+@Getter
 public class DongguanTenatsDTO {
     /**
      * 编号
      * TODO tenantId?
      */
+    @Excel(name = "BH",width = 15)
     @NotBlank
     @Size(max = 64)
     private String BH;
@@ -23,6 +27,7 @@ public class DongguanTenatsDTO {
     /**
      * 姓名
      */
+    @Excel(name = "XM",orderNum = "1",width = 15)
     @NotBlank
     @Size(max = 50)
     private String XM;
@@ -30,6 +35,7 @@ public class DongguanTenatsDTO {
     /**
      * 性别
      */
+    @Excel(name = "XB",orderNum = "2",width = 15)
     @NotBlank
     @Size(max = 10)
     private String XB;
@@ -38,6 +44,7 @@ public class DongguanTenatsDTO {
      * 国籍
      * TODO 增加画面项目 字典项请查看附录D
      */
+    @Excel(name = "GJ",orderNum = "3",width = 15)
     @NotBlank
     @Size(max = 50)
     private String GJ;
@@ -45,6 +52,7 @@ public class DongguanTenatsDTO {
     /**
      * 民族
      */
+    @Excel(name = "MZ",orderNum = "4",width = 15)
     @NotBlank
     @Size(max = 50)
     private String MZ;
@@ -53,6 +61,7 @@ public class DongguanTenatsDTO {
      * 民族代码
      * TODO 上传时数码转换 字典类型，参考附录D
      */
+    @Excel(name = "MZDM",orderNum = "5",width = 15)
     @NotBlank
     @Size(max = 20)
     private String MZDM;
@@ -61,6 +70,7 @@ public class DongguanTenatsDTO {
      * 证件类型
      * TODO 增加画面项目 字典类型，参考附录D
      */
+    @Excel(name = "ZJLX",orderNum = "6",width = 15)
     @NotBlank
     @Size(max = 50)
     private String ZJLX;
@@ -68,6 +78,7 @@ public class DongguanTenatsDTO {
     /**
      * 证件号码
      */
+    @Excel(name = "ZJHM",orderNum = "7",width = 15)
     @NotBlank
     @Size(max = 30)
     private String ZJHM;
@@ -76,6 +87,7 @@ public class DongguanTenatsDTO {
      * 出生日期
      * 从身份证号码获取
      */
+    @Excel(name = "CSRQ",orderNum = "8",width = 15)
     @NotBlank
     @Size(max = 8)
     private String CSRQ;
@@ -83,6 +95,7 @@ public class DongguanTenatsDTO {
     /**
      * 户籍地址名称
      */
+    @Excel(name = "HJDZ_DZMC",orderNum = "9",width = 15)
     @NotBlank
     @Size(max = 100)
     private String HJDZ_DZMC;
@@ -90,18 +103,21 @@ public class DongguanTenatsDTO {
     /**
      * 单位名称，非必填
      */
+    @Excel(name = "DWMC",orderNum = "10",width = 15)
     @Size(max = 100)
     private String DWMC;
 
     /**
      * 单位id，非必填
      */
+    @Excel(name = "DWBH",orderNum = "11",width = 15)
     @Size(max = 64)
     private String DWBH;
 
     /**
      * 房屋标准地址
      */
+    @Excel(name = "FWDZ",orderNum = "12",width = 15)
     @NotBlank
     @Size(max = 100)
     private String FWDZ;
@@ -110,6 +126,7 @@ public class DongguanTenatsDTO {
      * 房屋编号
      * TODO 房屋编号，关联房屋信息表FWBH
      */
+    @Excel(name = "FWBH",orderNum = "13",width = 15)
     @NotBlank
     @Size(max = 64)
     private String FWBH;
@@ -118,6 +135,7 @@ public class DongguanTenatsDTO {
      * 标准地址编码
      * TODO 从分局获取出租屋的标准地址编码
      */
+    @Excel(name = "BZDZ",orderNum = "14",width = 15)
     @NotBlank
     @Size(max = 64)
     private String BZDZ;
@@ -125,6 +143,7 @@ public class DongguanTenatsDTO {
     /**
      * 出租屋名称，非必填
      */
+    @Excel(name = "CZWMC",orderNum = "15",width = 15)
     @Size(max = 100)
     private String CZWMC;
 
@@ -132,6 +151,7 @@ public class DongguanTenatsDTO {
      * 居住方式
      * 1：单身居住，2：合伙居住，3：家庭居住，4：集体居住，9：其他
      */
+    @Excel(name = "JZFS",orderNum = "16",width = 15)
     @NotBlank
     @Size(max = 1)
     private String JZFS;
@@ -140,6 +160,7 @@ public class DongguanTenatsDTO {
      * 入住时间
      * TODO 格式YYYYMMDD
      */
+    @Excel(name = "RZSJ",orderNum = "17",width = 15)
     @NotBlank
     @Size(max = 8)
     private String RZSJ;
@@ -148,6 +169,7 @@ public class DongguanTenatsDTO {
      * 入住状态
      * 1.入住，2.注销（离开）
      */
+    @Excel(name = "RZZT",orderNum = "18",width = 15)
     @NotBlank
     @Size(max = 1)
     private String RZZT;
@@ -156,6 +178,7 @@ public class DongguanTenatsDTO {
      * 更新日期
      * 除此登记为入住时间，当入住状态为注销，则为离开时间
      */
+    @Excel(name = "GXRQ",orderNum = "19",width = 15)
     @NotBlank
     @Size(max = 10)
     private String GXRQ;
@@ -164,6 +187,7 @@ public class DongguanTenatsDTO {
      * 人口类别
      * TODO 字典类型，参考附件
      */
+    @Excel(name = "RKLB",orderNum = "20",width = 15)
     @NotBlank
     @Size(max = 64)
     private String RKLB;
@@ -172,6 +196,7 @@ public class DongguanTenatsDTO {
      * 是否居住登记
      * TODO 增加画面项目
      */
+    @Excel(name = "SFJZDJ",orderNum = "21",width = 15)
     @NotBlank
     @Size(max = 64)
     private String SFJZDJ;
@@ -179,6 +204,7 @@ public class DongguanTenatsDTO {
     /**
      * 联系电话1
      */
+    @Excel(name = "LXDH1",orderNum = "22",width = 15)
     @NotBlank
     @Size(max = 50)
     private String LXDH1;
@@ -186,18 +212,21 @@ public class DongguanTenatsDTO {
     /**
      * 联系电话2
      */
+    @Excel(name = "LXDH2",orderNum = "23",width = 15)
     @Size(max = 50)
     private String LXDH2;
 
     /**
      * 紧急联系人_姓名
      */
+    @Excel(name = "JJLXR_XM",orderNum = "24",width = 15)
     @Size(max = 50)
     private String JJLXR_XM;
 
     /**
      * 紧急联系人_联系电话
      */
+    @Excel(name = "JJLXR_LXDH",orderNum = "25",width = 15)
     @Size(max = 18)
     private String JJLXR_LXDH;
 
@@ -205,6 +234,7 @@ public class DongguanTenatsDTO {
      * 与房屋所有人关系
      * TODO 按照:1－房主本人、2－房主亲属、3－租户、4—其他的标准填写。
      */
+    @Excel(name = "YFZGX_JYQK",orderNum = "26",width = 15)
     @NotBlank
     @Size(max = 255)
     private String YFZGX_JYQK;
@@ -212,6 +242,7 @@ public class DongguanTenatsDTO {
     /**
      * 备注
      */
+    @Excel(name = "BZ",orderNum = "27",width = 15)
     @NotBlank
     @Size(max = 255)
     private String BZ;
@@ -219,16 +250,19 @@ public class DongguanTenatsDTO {
     /**
      * 证件正面图片
      */
-    private byte[] ZJ_TP_ZM;
+    @Excel(name = "ZJ_TP_ZM",orderNum = "28",width = 15)
+    private String ZJ_TP_ZM;
 
     /**
      * 证件反面图片
      */
-    private byte[] ZJ_TP_FM;
+    @Excel(name = "ZJ_TP_FM",orderNum = "29",width = 15)
+    private String ZJ_TP_FM;
 
     /**
      * 头像图片
      */
-    private byte[] TX_TP;
+    @Excel(name = "TX_TP",orderNum = "30",width = 15)
+    private String TX_TP;
 
 }

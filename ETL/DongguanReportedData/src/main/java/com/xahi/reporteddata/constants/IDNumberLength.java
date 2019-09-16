@@ -6,6 +6,10 @@ package com.xahi.reporteddata.constants;
  * @date 2019-09-16 10:19
  */
 public enum IDNumberLength {
+    /**
+     * FIFTEEN_ID_CARD 15位
+     * EIGHTEEN_ID_CARD 18位
+     */
     FIFTEEN_ID_CARD(15),
     EIGHTEEN_ID_CARD(18);
 
