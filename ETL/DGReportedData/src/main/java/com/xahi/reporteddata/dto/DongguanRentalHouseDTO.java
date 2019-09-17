@@ -1,5 +1,6 @@
 package com.xahi.reporteddata.dto;
 
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Size;
  * @date 2019-09-12 9:21
  */
 @Setter
+@Getter
 public class DongguanRentalHouseDTO {
 
     /**

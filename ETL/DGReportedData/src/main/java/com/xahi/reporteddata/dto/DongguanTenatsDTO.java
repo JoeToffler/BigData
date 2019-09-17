@@ -3,7 +3,6 @@ package com.xahi.reporteddata.dto;
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
