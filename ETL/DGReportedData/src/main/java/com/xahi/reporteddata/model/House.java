@@ -46,4 +46,20 @@ public class House implements Serializable {
     @Column(name = "modify_time", length = 20)
     private String modifyTime;
 
+    /**
+     * 增加字段
+     */
+
+    /**
+     * 房屋编号
+     */
+    @Column(name = "house_no",length = 64)
+    private String houseNo;
+
+    /**
+     * 标准地址编码
+     */
+    @Column(name = "addr_no",length = 64)
+    private String addrNo;
+
 }

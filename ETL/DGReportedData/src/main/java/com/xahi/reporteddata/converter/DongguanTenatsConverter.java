@@ -2,8 +2,6 @@ package com.xahi.reporteddata.converter;
 
 import com.xahi.reporteddata.constants.CheckInStatus;
 import com.xahi.reporteddata.constants.ConstantInterface;
-import com.xahi.reporteddata.constants.IDType;
-import com.xahi.reporteddata.constants.LiveMode;
 import com.xahi.reporteddata.dto.DongguanTenatsDTO;
 import com.xahi.reporteddata.model.House;
 import com.xahi.reporteddata.model.Tenant;
@@ -12,6 +10,7 @@ import com.xahi.reporteddata.repository.TenantRepository;
 import com.xahi.reporteddata.util.DataDictionaryConverter;
 import com.xahi.reporteddata.util.StringUtil;
 import com.xahi.reporteddata.util.TimeFormatUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +20,7 @@ import java.util.List;
 
 /**
  * @author YangPeng
- * @describe 数据转换
+ * @describe 出租屋居住人员信息表数据转换
  * @date 2019-09-11 16:44
  */
 @Component
@@ -40,29 +39,46 @@ public class DongguanTenatsConverter {
         dongguanTenatsDTO.setXM(tenant.getName());
         dongguanTenatsDTO.setXB(tenant.getSex() + ConstantInterface.WORD_XING);
 
-        dongguanTenatsDTO.setGJ(tenant.getNationality());
+        //如果国籍无值则赋默认值
+        if (StringUtils.isNotBlank(tenant.getNationality()))
+            dongguanTenatsDTO.setGJ(tenant.getNationality());
 
         dongguanTenatsDTO.setMZ(tenant.getNation() + ConstantInterface.WORD_ZU);
         dongguanTenatsDTO.setMZDM(DataDictionaryConverter.getMZDM(tenant.getNation()));
-        dongguanTenatsDTO.setZJLX(IDType.IDCARD.code);
+
+        //如果证件类型无值则赋默认值
+        if (StringUtils.isNotBlank(tenant.getIdType()))
+            dongguanTenatsDTO.setZJLX(tenant.getIdType());
+
         dongguanTenatsDTO.setZJHM(tenant.getIdCard());
         dongguanTenatsDTO.setCSRQ(StringUtil.getBirthday(tenant.getIdCard()));
         dongguanTenatsDTO.setHJDZ_DZMC(tenant.getRegisterAddr());
 
-        dongguanTenatsDTO.setDWMC("");
-        dongguanTenatsDTO.setDWBH("");
+        if (StringUtils.isNotBlank(tenant.getCompanyName()))
+            dongguanTenatsDTO.setDWMC(tenant.getCompanyName());
+        if (StringUtils.isNotBlank(tenant.getCompanyNumber()))
+            dongguanTenatsDTO.setDWBH(tenant.getCompanyNumber());
+
         //获取租客租住房屋
         House house = houseRepository.findByHouseId(Long.valueOf(tenant.getHouseId()));
-        dongguanTenatsDTO.setFWDZ(house.getHouseAddr());
+        if (StringUtils.isNotBlank(house.getHouseAddr())) {
+            dongguanTenatsDTO.setFWDZ(house.getHouseAddr());
+        }
 
         //房屋编号，关联房屋信息表FWBH，外部接口?
         dongguanTenatsDTO.setFWBH(house.getHouseId().toString());
-        //从分局获取出租屋的标准地址编码，外部接口?
-        dongguanTenatsDTO.setBZDZ("标准地址编码");
 
-        dongguanTenatsDTO.setCZWMC(house.getHouseName());
+        //从分局获取出租屋的标准地址编码，外部接口?
+        if (StringUtils.isNotBlank(house.getPropertyNo()))
+        dongguanTenatsDTO.setBZDZ(house.getPropertyNo());
+
+        if (StringUtils.isNotBlank(house.getHouseName()))
+            dongguanTenatsDTO.setCZWMC(house.getHouseName());
+
         //增加画面项目，居住方式?默认是多少
+        if (StringUtils.isNotBlank(tenant.getLiveMode()))
         dongguanTenatsDTO.setJZFS(tenant.getLiveMode());
+
         dongguanTenatsDTO.setRZSJ(StringUtil.toYYYYMMDD(tenant.getStartRentDate()));
         String endRentDate = tenant.getEndRentDate();
         if (endRentDate.isEmpty()) {
@@ -73,15 +89,21 @@ public class DongguanTenatsConverter {
         Date date = new Date(Long.valueOf(tenant.getModifyTime()));
         dongguanTenatsDTO.setGXRQ(TimeFormatUtil.toYYYY_MM_DD(date));
         //字典类型，参考附件	增加画面项目
-        //需要逻辑判断？
-        dongguanTenatsDTO.setRKLB("人口类别");
-        //增加画面项目？
-        dongguanTenatsDTO.setSFJZDJ("是");
+        if (StringUtils.isNotBlank(tenant.getPopulationType()))
+            dongguanTenatsDTO.setRKLB(tenant.getPopulationType());
+
+        if (StringUtils.isNotBlank(tenant.getDomicileRegistration()))
+            dongguanTenatsDTO.setSFJZDJ(tenant.getDomicileRegistration());
+
+        if (StringUtils.isNotBlank(tenant.getEmeryPhone()))
         dongguanTenatsDTO.setLXDH1(tenant.getEmeryPhone());
+
         dongguanTenatsDTO.setLXDH2("");
         dongguanTenatsDTO.setJJLXR_XM(tenant.getEmeryContact());
         dongguanTenatsDTO.setJJLXR_LXDH("");
+
         //1－房主本人、2－房主亲属、3－租户、4—其他
+        if (StringUtils.isNotBlank(tenant.getHomeownersRelationship()))
         dongguanTenatsDTO.setYFZGX_JYQK(tenant.getHomeownersRelationship());
 
         dongguanTenatsDTO.setBZ("");

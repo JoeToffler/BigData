@@ -1,6 +1,7 @@
 package com.xahi.reporteddata.dto;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import com.xahi.reporteddata.constants.*;
 import lombok.Getter;
 import lombok.Setter;
 import javax.validation.constraints.NotBlank;
@@ -41,12 +42,13 @@ public class DongguanTenatsDTO {
 
     /**
      * 国籍
+     * 缺省"中国"
      * TODO 增加画面项目 字典项请查看附录D
      */
     @Excel(name = "GJ",orderNum = "3",width = 15)
     @NotBlank
     @Size(max = 50)
-    private String GJ;
+    private String GJ = Nationality.CHN.code;
 
     /**
      * 民族
@@ -67,12 +69,13 @@ public class DongguanTenatsDTO {
 
     /**
      * 证件类型
+     * 缺省“身份证”
      * TODO 增加画面项目 字典类型，参考附录D
      */
     @Excel(name = "ZJLX",orderNum = "6",width = 15)
     @NotBlank
     @Size(max = 50)
-    private String ZJLX;
+    private String ZJLX = IDType.IDCARD.code;
 
     /**
      * 证件号码
@@ -104,14 +107,14 @@ public class DongguanTenatsDTO {
      */
     @Excel(name = "DWMC",orderNum = "10",width = 15)
     @Size(max = 100)
-    private String DWMC;
+    private String DWMC = "";
 
     /**
      * 单位id，非必填
      */
     @Excel(name = "DWBH",orderNum = "11",width = 15)
     @Size(max = 64)
-    private String DWBH;
+    private String DWBH = "";
 
     /**
      * 房屋标准地址
@@ -119,7 +122,7 @@ public class DongguanTenatsDTO {
     @Excel(name = "FWDZ",orderNum = "12",width = 15)
     @NotBlank
     @Size(max = 100)
-    private String FWDZ;
+    private String FWDZ = "未填写";
 
     /**
      * 房屋编号
@@ -132,19 +135,20 @@ public class DongguanTenatsDTO {
 
     /**
      * 标准地址编码
+     * 缺省
      * TODO 从分局获取出租屋的标准地址编码
      */
     @Excel(name = "BZDZ",orderNum = "14",width = 15)
     @NotBlank
     @Size(max = 64)
-    private String BZDZ;
+    private String BZDZ = "6F8B17FE-FA4F-84C6-E053-0A2B612B84C6";
 
     /**
      * 出租屋名称，非必填
      */
     @Excel(name = "CZWMC",orderNum = "15",width = 15)
     @Size(max = 100)
-    private String CZWMC;
+    private String CZWMC = "";
 
     /**
      * 居住方式
@@ -153,7 +157,7 @@ public class DongguanTenatsDTO {
     @Excel(name = "JZFS",orderNum = "16",width = 15)
     @NotBlank
     @Size(max = 1)
-    private String JZFS;
+    private String JZFS = LiveMode.SINGLE.code;
 
     /**
      * 入住时间
@@ -184,12 +188,13 @@ public class DongguanTenatsDTO {
 
     /**
      * 人口类别
+     * 缺省为流动人口
      * TODO 字典类型，参考附件
      */
     @Excel(name = "RKLB",orderNum = "20",width = 15)
     @NotBlank
     @Size(max = 64)
-    private String RKLB;
+    private String RKLB = PopulationType.MIGRANT.code;
 
     /**
      * 是否居住登记
@@ -198,7 +203,7 @@ public class DongguanTenatsDTO {
     @Excel(name = "SFJZDJ",orderNum = "21",width = 15)
     @NotBlank
     @Size(max = 64)
-    private String SFJZDJ;
+    private String SFJZDJ = "是";
 
     /**
      * 联系电话1
@@ -206,7 +211,7 @@ public class DongguanTenatsDTO {
     @Excel(name = "LXDH1",orderNum = "22",width = 15)
     @NotBlank
     @Size(max = 50)
-    private String LXDH1;
+    private String LXDH1 = "未登记";
 
     /**
      * 联系电话2
@@ -236,7 +241,7 @@ public class DongguanTenatsDTO {
     @Excel(name = "YFZGX_JYQK",orderNum = "26",width = 15)
     @NotBlank
     @Size(max = 255)
-    private String YFZGX_JYQK;
+    private String YFZGX_JYQK = HomeownersRelationship.TENANT.code;
 
     /**
      * 备注

@@ -19,6 +19,13 @@ public class Writer {
         pw.close();
     }
 
+    public static <T> void writeDat(List<T> data,String name) throws Exception {
+        OutputStreamWriter pw = new OutputStreamWriter(new FileOutputStream("./"+name+".dat"),"UTF-8");
+        pw.write(dataToString(data));
+        pw.flush();
+        pw.close();
+    }
+
     private static <T> String dataToString(List<T> data){
         StringBuilder sb = new StringBuilder();
         data.forEach(x->{

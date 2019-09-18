@@ -70,7 +70,7 @@ public class Filter {
      * @return
      */
     private static String replaceSymbol(String input) {
-        if (input.contains($.name())||input.contains(FEED.symbol)) {
+        if (input.contains($.name()) || input.contains(FEED.symbol)) {
             String output = input.replace($.name(), "\\$");
             output.replace(FEED.symbol, "\\\\r\\\\n");
             return output;

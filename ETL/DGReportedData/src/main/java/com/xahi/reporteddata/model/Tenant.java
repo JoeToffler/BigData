@@ -112,10 +112,9 @@ public class Tenant implements Serializable {
 
     /**
      * 国籍
-     * 暂定缺省为中国"CHN"
      */
     @Column(name = "nationality",length = 50)
-    private String nationality = "CHN";
+    private String nationality;
 
     /**
      * 证件类型
@@ -128,6 +127,12 @@ public class Tenant implements Serializable {
      */
     @Column(name = "company_name",length = 100)
     private String companyName;
+
+    /**
+     * 单位编号
+     */
+    @Column(name = "company_number",length = 100)
+    private String companyNumber;
 
     /**
      * 居住方式

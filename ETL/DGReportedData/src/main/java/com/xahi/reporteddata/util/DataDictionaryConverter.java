@@ -16,6 +16,7 @@ public class DataDictionaryConverter {
      */
     public static String getMZDM(String nation) {
         Nation[] values = Nation.values();
+        if (nation.equals(Nation.HAN.description))return Nation.HAN.code;
         for (Nation value : values) {
             if (nation.equals(value.description)) {
                 return value.code;

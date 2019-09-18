@@ -2,13 +2,11 @@ package com.xahi.reporteddata;
 
 import com.mongodb.client.MongoCollection;
 import com.xahi.reporteddata.constants.DataType;
-import com.xahi.reporteddata.constants.Nationality;
 import com.xahi.reporteddata.converter.DongguanTenatsConverter;
 import com.xahi.reporteddata.dto.DongguanTenatsDTO;
 import com.xahi.reporteddata.dto.NationalityEnumDTO;
 import com.xahi.reporteddata.model.Tenant;
 import com.xahi.reporteddata.repository.TenantRepository;
-import com.xahi.reporteddata.util.DynamicEnumUtils;
 import com.xahi.reporteddata.util.data.Filter;
 import com.xahi.reporteddata.util.excel.ExcelLocalDown;
 import com.xahi.reporteddata.util.excel.ExcelWebDownUp;
@@ -16,8 +14,6 @@ import com.xahi.reporteddata.util.file.Writer;
 import lombok.extern.java.Log;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -108,7 +103,14 @@ public class Controller {
     public void writeCsv() throws Exception {
         List<DongguanTenatsDTO> list = dongguanTenatsConverter.getList();
         List<DongguanTenatsDTO> l = Filter.convert(DongguanTenatsDTO.class, list, "$", "\\r\\n", "TX_TP");
-        Writer.writeCsv(l, "tenants_info");
+        Writer.writeCsv(l, "XQ_FWXX");
+    }
+
+    @GetMapping(value = "/writeDat")
+    public void writeDat() throws Exception {
+        List<DongguanTenatsDTO> list = dongguanTenatsConverter.getList();
+        List<DongguanTenatsDTO> l = Filter.convert(DongguanTenatsDTO.class, list, "$", "\\r\\n", "TX_TP");
+        Writer.writeDat(l, "XQ_FWXX");
     }
 
     @PostMapping(value = "/excelToEnum")
