@@ -40,7 +40,7 @@ public class DongguanTenatsConverter {
         dongguanTenatsDTO.setXM(tenant.getName());
         dongguanTenatsDTO.setXB(tenant.getSex() + ConstantInterface.WORD_XING);
 
-        dongguanTenatsDTO.setGJ(tenant.getNation());
+        dongguanTenatsDTO.setGJ(tenant.getNationality());
 
         dongguanTenatsDTO.setMZ(tenant.getNation() + ConstantInterface.WORD_ZU);
         dongguanTenatsDTO.setMZDM(DataDictionaryConverter.getMZDM(tenant.getNation()));

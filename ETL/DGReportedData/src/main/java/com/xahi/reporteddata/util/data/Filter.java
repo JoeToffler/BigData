@@ -25,7 +25,7 @@ public class Filter {
      * @param c       替换字符
      * @param lc      换行替换的字符
      * @param lastKey 最后key的name
-     * @return 解析后的舒徐
+     * @return 解析后的数据
      */
     public static <T> List<T> convert(Class clazz, List<T> ts, String c, String lc, String lastKey) {
         ArrayList<T> list = new ArrayList<>();

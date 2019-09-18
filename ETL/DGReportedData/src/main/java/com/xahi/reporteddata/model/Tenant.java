@@ -86,7 +86,6 @@ public class Tenant implements Serializable {
      * 修改时间
      */
     @Column(name = "modify_time", length = 50)
-//    @JSONField(serialize = false)
     private String modifyTime;
 
     /**
@@ -113,9 +112,10 @@ public class Tenant implements Serializable {
 
     /**
      * 国籍
+     * 暂定缺省为中国"CHN"
      */
     @Column(name = "nationality",length = 50)
-    private String nationality;
+    private String nationality = "CHN";
 
     /**
      * 证件类型

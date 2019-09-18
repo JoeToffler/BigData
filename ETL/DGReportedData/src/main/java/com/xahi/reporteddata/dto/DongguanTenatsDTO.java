@@ -264,4 +264,10 @@ public class DongguanTenatsDTO {
     @Excel(name = "TX_TP",orderNum = "30",width = 15)
     private String TX_TP;
 
+
+    @Override
+    public String toString() {
+        return BH + XM + XB + GJ + MZ + MZDM + ZJLX + ZJHM + CSRQ + HJDZ_DZMC + DWMC + DWBH + FWDZ + FWBH + BZDZ + CZWMC + JZFS + RZSJ + RZZT + GXRQ + RKLB + SFJZDJ + LXDH1 + LXDH2 + JJLXR_XM + JJLXR_LXDH + YFZGX_JYQK + BZ + ZJ_TP_ZM + ZJ_TP_FM + TX_TP;
+    }
+
 }

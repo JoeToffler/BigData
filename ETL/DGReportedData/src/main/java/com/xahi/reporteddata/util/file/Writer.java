@@ -1,5 +1,7 @@
 package com.xahi.reporteddata.util.file;
 
+import org.apache.poi.ss.formula.functions.T;
+
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.List;
@@ -11,9 +13,17 @@ import java.util.List;
  */
 public class Writer {
     public static <T> void writeCsv(List<T> data,String name) throws Exception {
-        OutputStreamWriter pw = null;
-        pw = new OutputStreamWriter(new FileOutputStream("./"+name+".csv"),"UTF-8");
-        pw.write(data.toString());
+        OutputStreamWriter pw = new OutputStreamWriter(new FileOutputStream("./"+name+".csv"),"UTF-8");
+        pw.write(dataToString(data));
+        pw.flush();
         pw.close();
+    }
+
+    private static <T> String dataToString(List<T> data){
+        StringBuilder sb = new StringBuilder();
+        data.forEach(x->{
+            sb.append(x.toString());
+        });
+        return sb.toString();
     }
 }

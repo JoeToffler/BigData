@@ -61,6 +61,15 @@ public class ExcelWebDownUp {
 		downLoadExcel(fileName, response, workbook);
 	}
 
+	/**
+	 * 导入
+	 * @param filePath
+	 * @param titleRows
+	 * @param headerRows
+	 * @param pojoClass
+	 * @param <T>
+	 * @return
+	 */
 	public static <T> List<T> importExcel(String filePath, Integer titleRows, Integer headerRows, Class<T> pojoClass) {
 		if (StringUtils.isBlank(filePath)) {
 			return null;
@@ -80,6 +89,15 @@ public class ExcelWebDownUp {
 		return list;
 	}
 
+	/**
+	 *
+	 * @param file
+	 * @param titleRows
+	 * @param headerRows
+	 * @param pojoClass
+	 * @param <T>
+	 * @return
+	 */
 	public static <T> List<T> importExcel(MultipartFile file, Integer titleRows, Integer headerRows,
                                           Class<T> pojoClass) {
 		if (file == null) {
