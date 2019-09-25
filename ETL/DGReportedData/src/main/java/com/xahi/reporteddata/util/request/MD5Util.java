@@ -35,7 +35,7 @@ public class MD5Util {
         String fileMD5 = getFileMD5String(file);
         System.out.println("file:"+fileMD5);
         String uuid = getUuid().toString();
-        String token = getAccessToken("beb0dfb65832408d967de3379a1b9c10",uuid);
+        String token = getAccessToken("",uuid);
         System.out.println("uuid:"+uuid);
         System.out.println("token:"+token);
     }
