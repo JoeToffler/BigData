@@ -123,13 +123,13 @@ public class Tenant implements Serializable {
     private String idType;
 
     /**
-     * 单位名称
+     * 单位名称 非必填
      */
     @Column(name = "company_name",length = 100)
     private String companyName;
 
     /**
-     * 单位编号
+     * 单位编号 非必填
      */
     @Column(name = "company_number",length = 100)
     private String companyNumber;
@@ -139,6 +139,7 @@ public class Tenant implements Serializable {
      */
     @Column(name = "live_mode",length = 1)
     private String liveMode;
+
 
     /**
      * 人口类别

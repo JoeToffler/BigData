@@ -22,6 +22,9 @@ public class House implements Serializable {
     @Column(name = "house_id", unique = true, nullable = false, updatable = false)
     private Long houseId;
 
+    @Column(name = "building_id")
+    private Long buildingId;
+
     /**
      * 房屋名称
      */
@@ -32,7 +35,7 @@ public class House implements Serializable {
      * 房屋地址
      */
     @Column(name = "house_addr")
-    private String houseAddr;
+    private String houseAddr = "未填写";
 
     /**
      * 房产证号
@@ -53,11 +56,11 @@ public class House implements Serializable {
     /**
      * 房屋编号
      */
-    @Column(name = "house_no",length = 64)
-    private String houseNo;
+    @Column(name = "house_code",length = 64)
+    private String houseCode;
 
     /**
-     * 标准地址编码
+     * 标准地址编号
      */
     @Column(name = "addr_no",length = 64)
     private String addrNo;

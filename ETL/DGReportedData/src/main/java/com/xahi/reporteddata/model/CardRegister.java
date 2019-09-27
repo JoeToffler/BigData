@@ -42,4 +42,13 @@ public class CardRegister implements Serializable {
     @Column(name = "id_card", length = 50, nullable = false)
     private String cardId;
 
+    /**
+     * 新增字段
+     */
+
+    /**
+     * 电话号码
+     */
+    @Column(name = "phone", length = 18, nullable = false)
+    private String phone;
 }

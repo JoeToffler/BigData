@@ -52,9 +52,4 @@ public class FileMD5Util {
         stringbuffer.append(c1);
     }
 
-    public static void main(String[] args) throws IOException {
-        File file = new File("./XQ_FWXX.csv");
-        String fileMD5 = getFileMD5String(file);
-        System.out.println(fileMD5);
-    }
 }

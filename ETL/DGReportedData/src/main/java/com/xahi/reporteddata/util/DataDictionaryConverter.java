@@ -1,6 +1,6 @@
 package com.xahi.reporteddata.util;
 
-import com.xahi.reporteddata.constants.Nation;
+import com.xahi.reporteddata.constants.tenats.Nation;
 
 /**
  * @author YangPeng

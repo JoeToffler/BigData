@@ -2,10 +2,10 @@ package com.xahi.reporteddata.util;
 
 import org.apache.commons.lang3.StringUtils;
 
-import static com.xahi.reporteddata.constants.IDNumberLength.EIGHTEEN_ID_CARD;
-import static com.xahi.reporteddata.constants.IDNumberLength.FIFTEEN_ID_CARD;
-import static com.xahi.reporteddata.constants.Sex.FEMALE;
-import static com.xahi.reporteddata.constants.Sex.MALE;
+import static com.xahi.reporteddata.constants.tenats.IDNumberLength.EIGHTEEN_ID_CARD;
+import static com.xahi.reporteddata.constants.tenats.IDNumberLength.FIFTEEN_ID_CARD;
+import static com.xahi.reporteddata.constants.tenats.Sex.FEMALE;
+import static com.xahi.reporteddata.constants.tenats.Sex.MALE;
 
 /**
  * @author YangPeng

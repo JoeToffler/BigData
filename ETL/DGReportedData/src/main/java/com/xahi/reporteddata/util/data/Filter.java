@@ -12,7 +12,7 @@ import static com.xahi.reporteddata.constants.Symbol.FEED;
 
 /**
  * @author YangPeng
- * @describe
+ * @describe 数据过滤清洗
  * @date 2019-09-17 10:30
  */
 public class Filter {
@@ -23,11 +23,9 @@ public class Filter {
      * @param clazz   解析类
      * @param ts      解析数据
      * @param c       替换字符
-     * @param lc      换行替换的字符
-     * @param lastKey 最后key的name
      * @return 解析后的数据
      */
-    public static <T> List<T> convert(Class clazz, List<T> ts, String c, String lc, String lastKey) {
+    public static <T> List<T> convert(Class clazz, List<T> ts, String c) {
         ArrayList<T> list = new ArrayList<>();
         String set = "set";
         String get = "get";
@@ -41,17 +39,15 @@ public class Filter {
                         //如果报NullPointException则getStr=""
                         try {
                             getStr = methodGet.invoke(t, null).toString();
+                            if (getStr == null) {
+                                getStr="";
+                            }
                             //判断是否有字符需要替换
                             getStr = replaceSymbol(getStr);
                         } catch (NullPointerException e) {
                         }
-                        if (!method.getName().contains(lastKey)) {
-                            getStr = getStr + c;
-                            method.invoke(t, getStr);
-                        } else {
-                            getStr = getStr + c + lc;
-                            method.invoke(t, getStr);
-                        }
+                        getStr = getStr + c;
+                        method.invoke(t, getStr);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -72,10 +68,14 @@ public class Filter {
     private static String replaceSymbol(String input) {
         if (input.contains($.name()) || input.contains(FEED.symbol)) {
             String output = input.replace($.name(), "\\$");
-            output.replace(FEED.symbol, "\\\\r\\\\n");
-            return output;
+            String result = output.replace(FEED.symbol, "\\\\r\\\\n");
+            return result;
         }
         return input;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("\\\\r\\\\n");
     }
 
 }

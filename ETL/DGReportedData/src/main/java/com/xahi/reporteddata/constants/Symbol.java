@@ -7,9 +7,10 @@ package com.xahi.reporteddata.constants;
  */
 public enum Symbol {
     /**
-     *
+     * 符号
      */
-    $("$"), FEED("\\r\\n");
+    $("$"), FEED("\r\n");
+
     public String symbol;
 
     Symbol(String symbol) {

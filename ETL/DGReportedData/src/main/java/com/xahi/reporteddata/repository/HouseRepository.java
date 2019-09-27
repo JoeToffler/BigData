@@ -3,6 +3,8 @@ package com.xahi.reporteddata.repository;
 import com.xahi.reporteddata.model.House;
 import org.springframework.data.repository.Repository;
 
+import java.util.List;
+
 /**
  * @author YangPeng
  * @describe
@@ -10,5 +12,7 @@ import org.springframework.data.repository.Repository;
  */
 @org.springframework.stereotype.Repository
 public interface HouseRepository extends Repository<House,Long> {
+    List<House> findByIdGreaterThan(Long id);
     House findByHouseId(Long houseId);
+    List<House> findAll();
 }

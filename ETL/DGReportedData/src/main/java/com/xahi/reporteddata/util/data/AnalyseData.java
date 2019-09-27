@@ -19,9 +19,7 @@ public class AnalyseData {
     }
 
     public static void main(String[] args) {
-        String text =
-                "111153$黄帅$男性$中国$汉族$01$1$142730199702050759$19970205$山西省夏县水头镇大张村二组北七街08号$$$郭杜北街25号$330$6F8B17FE-FA4F-84C6-E053-0A2B612B84C6$$1$20190726$2$2019-07-26$3$是$未登记$$$$3$$$$";
-
+        String text ="340822197304114819$$340822197304114819$未填写$吴尚勇$XXXX$$$$广东省东莞市塘厦镇平山林场路11号502房$1000003$$";
         String c = "$";
         int count = countChar(text, c);
         System.out.println(count);

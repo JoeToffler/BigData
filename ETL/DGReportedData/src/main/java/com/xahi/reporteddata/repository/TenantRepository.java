@@ -15,7 +15,6 @@ import java.util.List;
  */
 @org.springframework.stereotype.Repository
 public interface TenantRepository extends Repository<Tenant, Integer> {
-    Page<Tenant> findAll(Pageable pageable);
-
+    List<Tenant> findByIdGreaterThan(Long id);
     List<Tenant> findAll();
 }

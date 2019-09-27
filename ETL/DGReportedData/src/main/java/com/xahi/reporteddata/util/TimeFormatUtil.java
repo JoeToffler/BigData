@@ -1,6 +1,7 @@
 package com.xahi.reporteddata.util;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -29,6 +30,16 @@ public class TimeFormatUtil {
     }
 
     /**
+     * YYYYMMDDHHMISS
+     */
+    public static String toYYYYMMDDHHMISS(String date) throws ParseException {
+        DateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date1= format.parse(date);
+        String result = format.format(date1);
+        return result;
+    }
+
+    /**
      * YYYY-MM-DD
      */
     public static String toYYYY_MM_DD(Date date){
@@ -37,4 +48,9 @@ public class TimeFormatUtil {
         return result;
     }
 
+    public static void main(String[] args) throws ParseException {
+        String a = "2019-07-09 16:18:30";
+        System.out.println(toYYYYMMDDHHMISS(new Date()));
+        System.out.println(toYYYYMMDDHHMISS("20190926141755"));
+    }
 }

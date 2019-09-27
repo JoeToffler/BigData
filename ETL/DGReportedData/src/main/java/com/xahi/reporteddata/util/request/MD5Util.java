@@ -31,12 +31,13 @@ public class MD5Util {
     }
 
     public static void main(String[] args) throws IOException {
-        File file = new File("./XQ_FWXX.dat");
+        File file = new File("./20190926102620891_125_441900_101.dat");
         String fileMD5 = getFileMD5String(file);
-        System.out.println("file:"+fileMD5);
+        System.out.println("file(md5):"+fileMD5);
+
         String uuid = getUuid().toString();
-        String token = getAccessToken("",uuid);
-        System.out.println("uuid:"+uuid);
-        System.out.println("token:"+token);
+        String token = getAccessToken("test",uuid);
+        System.out.println("uuid(random):"+uuid);
+        System.out.println("token(accessToken):"+token);
     }
 }

@@ -5,7 +5,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:mysql://192.168.101.63:3306/pasq_dev?useLegacyDatetimeCode=false&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:8080/data?useLegacyDatetimeCode=false&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&allowPublicKeyRetrieval=true
     username: hxzh
     password: 1Q2w3e4r5t!@
     initialization-mode: never
@@ -16,7 +16,14 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect  ## org.hibernate.dialect.MySQL5InnoDBDialect
       format_sql: false
-    show_sql: true
+    show_sql: false
   data:
     mongodb:
-      uri: mongodb://192.168.101.58:27017/pasq
+      uri: mongodb://localhost:8080/data
+
+dongguan:
+  account:
+    accessId: test
+    accessPwd: test
+  report:
+    url: report.data.com

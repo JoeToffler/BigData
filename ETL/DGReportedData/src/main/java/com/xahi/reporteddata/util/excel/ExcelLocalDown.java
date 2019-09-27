@@ -34,9 +34,6 @@ public class ExcelLocalDown {
         out.close();
     }
 
-
-
-
     public static void exportExcel(List<Map<String, Object>> list, String fileName) throws IOException {
         defaultExport(list, fileName);
     }
