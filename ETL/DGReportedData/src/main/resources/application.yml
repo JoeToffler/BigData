@@ -5,7 +5,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:mysql://localhost:8080/data?useLegacyDatetimeCode=false&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://192.168.101.63:3306/report_data_test?useLegacyDatetimeCode=false&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&allowPublicKeyRetrieval=true
     username: hxzh
     password: 1Q2w3e4r5t!@
     initialization-mode: never
@@ -19,11 +19,17 @@ spring:
     show_sql: false
   data:
     mongodb:
-      uri: mongodb://localhost:8080/data
+      uri: mongodb://192.168.101.58:27017/report
 
 dongguan:
   account:
-    accessId: test
-    accessPwd: test
+    accessId: ltyys
+    accessPwd: beb0dfb65832408d967de3379a1b9c10
   report:
-    url: report.data.com
+    url: bzfw.dg.cn/import/chuzhuwu
+scheduled:
+  houseTime: 0 0 22 * * ?
+  tenantTime: 0 0 23 * * ?
+  authTime: 0 0 23 * * ?
+  recordTime: 0 0 23 * * ?
+  terminalTime: 0 0 23 * * ?

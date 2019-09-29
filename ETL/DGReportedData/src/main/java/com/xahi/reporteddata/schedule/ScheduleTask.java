@@ -1,8 +1,6 @@
 package com.xahi.reporteddata.schedule;
 
 import com.alibaba.fastjson.JSONObject;
-import com.xahi.reporteddata.constants.ConstantInterface;
-import com.xahi.reporteddata.constants.request.DataCollectSystem;
 import com.xahi.reporteddata.constants.request.DataType;
 import com.xahi.reporteddata.constants.result.ResultCode;
 import com.xahi.reporteddata.dto.ResultDTO;
@@ -10,16 +8,14 @@ import com.xahi.reporteddata.model.*;
 import com.xahi.reporteddata.repository.*;
 import com.xahi.reporteddata.service.*;
 import lombok.extern.java.Log;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author YangPeng
@@ -29,6 +25,11 @@ import java.util.Map;
 @Log
 @Service
 public class ScheduleTask {
+    class ScheduleRunnable implements Runnable {
+        @Override
+        public void run() {
+        }
+    }
 
     @Autowired
     TenantRepository tenantRepository;
@@ -64,160 +65,197 @@ public class ScheduleTask {
     @Autowired
     DongguanRecordService recordService;
 
-    /**
-     * 出租屋居住人员信息表
-     */
-//    @Scheduled(cron = "*/10 * * * * *")
-    public void uploadTenantData() throws Exception {
-        String tableName = DataType.XQ_FWXX.description;
-        List<ReportIndex> indices = reportIndexRepository.findAll();
-        if (indices.isEmpty() || indices.get(0).getTenantId() == null) {
-            List<Tenant> all = tenantRepository.findAll();
-            if (all.isEmpty()) {
-                log.info("出租屋居住人员信息表暂无数据无法上传");
-                return;
-            } else {
-                String result = tenantsService.reportData(all);
-                log.info(codeProcess(tableName, result));
-                processIndexByResponse(all, indices, result);
-            }
-        } else {
-            Long tenantId = indices.get(0).getTenantId();
-            List<Tenant> all = tenantRepository.findByIdGreaterThan(tenantId);
-            if (all.isEmpty()) {
-                log.info("出租屋居住人员信息表暂无更新数据无法上传");
-                return;
-            } else {
-                String result = tenantsService.reportData(all);
-                log.info(codeProcess(tableName, result));
-                processIndexByResponse(all, indices, result);
-            }
-        }
-    }
+    @Autowired
+    ThreadPoolTaskScheduler threadPoolTaskScheduler;
+
+    @Value("${scheduled.houseTime}")
+    private String houseTime;
+
+    @Value("${scheduled.tenantTime}")
+    private String tenantTime;
+
+    @Value("${scheduled.authTime}")
+    private String authTime;
+
+    @Value("${scheduled.recordTime}")
+    private String recordTime;
+
+    @Value("${scheduled.terminalTime}")
+    private String terminalTime;
 
     /**
      * 出租屋房屋信息表
      */
-//    @Scheduled(cron = "*/10 * * * * *")
-    public void uploadHouseData() throws Exception {
-        String tableName = DataType.XQ_YZXX.description;
-        List<ReportIndex> indices = reportIndexRepository.findAll();
-        if (indices.isEmpty() || indices.get(0).getHouseId() == null) {
-            List<House> all = houseRepository.findAll();
-            if (all.isEmpty()) {
-                log.info("出租屋房屋信息表暂无数据无法上传");
-                return;
-            } else {
-                String result = houseService.reportData(all);
-                log.info(codeProcess(tableName, result));
-                processIndexByResponse(all, indices, result);
+    public void uploadHouse() {
+        threadPoolTaskScheduler.schedule(new ScheduleRunnable(), triggerContext -> {
+            String tableName = DataType.XQ_YZXX.description;
+            List<ReportIndex> indices = reportIndexRepository.findAll();
+            try {
+                if (indices.isEmpty() || indices.get(0).getHouseId() == null) {
+                    List<House> all = houseRepository.findAll();
+                    if (all.isEmpty()) {
+                        log.info("出租屋房屋信息表暂无数据无法上传");
+                    } else {
+                        String result = houseService.reportData(all);
+                        log.info(codeProcess(tableName, result));
+                        processIndexByResponse(all, indices, result);
+                    }
+                } else {
+                    Long houseId = indices.get(0).getHouseId();
+                    List<House> all = houseRepository.findByIdGreaterThan(houseId);
+                    if (all.isEmpty()) {
+                        log.info("出租屋房屋信息表暂无更新数据无法上传");
+                    } else {
+                        String result = houseService.reportData(all);
+                        log.info(codeProcess(tableName, result));
+                        processIndexByResponse(all, indices, result);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } else {
-            Long houseId = indices.get(0).getHouseId();
-            List<House> all = houseRepository.findByIdGreaterThan(houseId);
-            if (all.isEmpty()) {
-                log.info("出租屋房屋信息表暂无更新数据无法上传");
-                return;
-            } else {
-                String result = houseService.reportData(all);
-                log.info(codeProcess(tableName, result));
-                processIndexByResponse(all, indices, result);
+            return new CronTrigger(houseTime).nextExecutionTime(triggerContext);
+        });
+    }
+
+    /**
+     * 出租屋居住人员信息表
+     */
+    public void uploadTenant() {
+        threadPoolTaskScheduler.schedule(new ScheduleRunnable(), triggerContext -> {
+            try {
+                String tableName = DataType.XQ_FWXX.description;
+                List<ReportIndex> indices = reportIndexRepository.findAll();
+                if (indices.isEmpty() || indices.get(0).getTenantId() == null) {
+                    List<Tenant> all = tenantRepository.findAll();
+                    if (all.isEmpty()) {
+                        log.info("出租屋居住人员信息表暂无数据无法上传");
+                    } else {
+                        String result = tenantsService.reportData(all);
+                        log.info(codeProcess(tableName, result));
+                        processIndexByResponse(all, indices, result);
+                    }
+                } else {
+                    Long tenantId = indices.get(0).getTenantId();
+                    List<Tenant> all = tenantRepository.findByIdGreaterThan(tenantId);
+                    if (all.isEmpty()) {
+                        log.info("出租屋居住人员信息表暂无更新数据无法上传");
+                    } else {
+                        String result = tenantsService.reportData(all);
+                        log.info(codeProcess(tableName, result));
+                        processIndexByResponse(all, indices, result);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }
+            return new CronTrigger(tenantTime).nextExecutionTime(triggerContext);
+        });
     }
 
     /**
      * 出租屋门禁开门授权表
      */
-//    @Scheduled(cron = "*/10 * * * * *")
-    public void uploadAuthData() throws Exception {
-        String tableName = DataType.XQ_MJKKSQXX.description;
-        List<ReportIndex> indices = reportIndexRepository.findAll();
-        if (indices.isEmpty() || indices.get(0).getAuthId() == null) {
-            List<CardRegister> all = cardRegisterRepository.findAll();
-            if (all.isEmpty()) {
-                log.info("出租屋门禁开门授权表暂无数据无法上传");
-                return;
-            } else {
-                String result = cardRegisterService.reportData(all);
-                log.info(codeProcess(tableName, result));
-                processIndexByResponse(all, indices, result);
+    public void uploadAuth() {
+        threadPoolTaskScheduler.schedule(new ScheduleRunnable(), triggerContext -> {
+            try {
+                String tableName = DataType.XQ_MJKKSQXX.description;
+                List<ReportIndex> indices = reportIndexRepository.findAll();
+                if (indices.isEmpty() || indices.get(0).getAuthId() == null) {
+                    List<CardRegister> all = cardRegisterRepository.findAll();
+                    if (all.isEmpty()) {
+                        log.info("出租屋门禁开门授权表暂无数据无法上传");
+                    } else {
+                        String result = cardRegisterService.reportData(all);
+                        log.info(codeProcess(tableName, result));
+                        processIndexByResponse(all, indices, result);
+                    }
+                } else {
+                    Long authId = indices.get(0).getAuthId();
+                    List<CardRegister> all = cardRegisterRepository.findByIdGreaterThan(authId);
+                    if (all.isEmpty()) {
+                        log.info("出租屋门禁开门授权表暂无更新数据无法上传");
+                    } else {
+                        String result = cardRegisterService.reportData(all);
+                        log.info(codeProcess(tableName, result));
+                        processIndexByResponse(all, indices, result);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } else {
-            Long authId = indices.get(0).getAuthId();
-            List<CardRegister> all = cardRegisterRepository.findByIdGreaterThan(authId);
-            if (all.isEmpty()) {
-                log.info("出租屋门禁开门授权表暂无更新数据无法上传");
-                return;
-            } else {
-                String result = cardRegisterService.reportData(all);
-                log.info(codeProcess(tableName, result));
-                processIndexByResponse(all, indices, result);
-            }
-        }
+            return new CronTrigger(authTime).nextExecutionTime(triggerContext);
+        });
     }
 
     /**
      * 出租屋门禁开门记录信息表
      */
-    @Scheduled(cron = "*/10 * * * * *")
-    public void uploadRecordData() throws Exception {
-        String tableName = DataType.XQ_MJSKXX.description;
-        List<ReportIndex> indices = reportIndexRepository.findAll();
-        if (indices.isEmpty() || indices.get(0).getRecordId() == null) {
-            List<Record> all = recordRepository.findAll();
-            if (all.isEmpty()) {
-                log.info("出租屋门禁开门记录信息表暂无数据无法上传");
-                return;
-            } else {
-                String result = recordService.reportData(all);
-                log.info(codeProcess(tableName, result));
-                processIndexByResponse(all, indices, result);
+    public void uploadRecord() {
+        threadPoolTaskScheduler.schedule(new ScheduleRunnable(), triggerContext -> {
+            try {
+                String tableName = DataType.XQ_MJSKXX.description;
+                List<ReportIndex> indices = reportIndexRepository.findAll();
+                if (indices.isEmpty() || indices.get(0).getRecordId() == null) {
+                    List<Record> all = recordRepository.findAll();
+                    if (all.isEmpty()) {
+                        log.info("出租屋门禁开门记录信息表暂无数据无法上传");
+                    } else {
+                        String result = recordService.reportData(all);
+                        log.info(codeProcess(tableName, result));
+                        processIndexByResponse(all, indices, result);
+                    }
+                } else {
+                    Long recordId = indices.get(0).getRecordId();
+                    List<Record> all = recordRepository.findByIdGreaterThan(recordId.toString());
+                    if (all.isEmpty()) {
+                        log.info("出租屋门禁开门记录信息表暂无更新数据无法上传");
+                    } else {
+                        String result = recordService.reportData(all);
+                        log.info(codeProcess(tableName, result));
+                        processIndexByResponse(all, indices, result);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } else {
-            Long recordId = indices.get(0).getRecordId();
-            List<Record> all = recordRepository.findByIdGreaterThan(recordId.toString());
-
-            if (all.isEmpty()) {
-                log.info("出租屋门禁终端信息表暂无更新数据无法上传");
-                return;
-            } else {
-                String result = recordService.reportData(all);
-                log.info(codeProcess(tableName, result));
-                processIndexByResponse(all, indices, result);
-            }
-        }
+            return new CronTrigger(recordTime).nextExecutionTime(triggerContext);
+        });
     }
 
     /**
      * 出租屋门禁终端信息表
      */
-//    @Scheduled(cron = "*/10 * * * * *")
-    public void uploadTerminalData() throws Exception {
-        String tableName = DataType.XQ_MJZD.description;
-        List<ReportIndex> indices = reportIndexRepository.findAll();
-        if (indices.isEmpty() || indices.get(0).getDeviceId() == null) {
-            List<Device> all = deviceRepository.findAll();
-            if (all.isEmpty()) {
-                log.info("出租屋门禁终端信息表暂无数据无法上传");
-                return;
-            } else {
-                String result = deviceService.reportData(all);
-                log.info(codeProcess(tableName, result));
-                processIndexByResponse(all, indices, result);
+    public void uploadTerminal() {
+        threadPoolTaskScheduler.schedule(new ScheduleRunnable(), triggerContext -> {
+            try {
+                String tableName = DataType.XQ_MJZD.description;
+                List<ReportIndex> indices = reportIndexRepository.findAll();
+                if (indices.isEmpty() || indices.get(0).getDeviceId() == null) {
+                    List<Device> all = deviceRepository.findAll();
+                    if (all.isEmpty()) {
+                        log.info("出租屋门禁终端信息表暂无数据无法上传");
+                    } else {
+                        String result = deviceService.reportData(all);
+                        log.info(codeProcess(tableName, result));
+                        processIndexByResponse(all, indices, result);
+                    }
+                } else {
+                    Integer deviceId = Integer.valueOf(indices.get(0).getDeviceId().toString());
+                    List<Device> all = deviceRepository.findByIdGreaterThan(deviceId);
+                    if (all.isEmpty()) {
+                        log.info("出租屋门禁终端信息表暂无更新数据无法上传");
+                    } else {
+                        String result = deviceService.reportData(all);
+                        log.info(codeProcess(tableName, result));
+                        processIndexByResponse(all, indices, result);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } else {
-            Integer deviceId = Integer.valueOf(indices.get(0).getDeviceId().toString());
-            List<Device> all = deviceRepository.findByIdGreaterThan(deviceId);
-            if (all.isEmpty()) {
-                log.info("出租屋门禁终端信息表暂无更新数据无法上传");
-                return;
-            } else {
-                String result = deviceService.reportData(all);
-                log.info(codeProcess(tableName, result));
-                processIndexByResponse(all, indices, result);
-            }
-        }
+            return new CronTrigger(terminalTime).nextExecutionTime(triggerContext);
+        });
     }
 
     private <T> void processIndexByResponse(List<T> list, List<ReportIndex> indices, String response) throws Exception {

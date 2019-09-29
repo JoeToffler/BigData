@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication(scanBasePackages = {"com.xahi"})
 @EnableScheduling
-public class DongguanReporteddataApplication {
+public class ReportedDataApplication {
     @Value("account.accessId")
     public String accessId;
 
@@ -15,7 +15,7 @@ public class DongguanReporteddataApplication {
     public String accessPwd;
 
     public static void main(String[] args) {
-        SpringApplication.run(DongguanReporteddataApplication.class, args);
+        SpringApplication.run(ReportedDataApplication.class, args);
     }
 
 }
