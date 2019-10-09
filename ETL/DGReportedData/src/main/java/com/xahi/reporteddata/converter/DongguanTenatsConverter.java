@@ -8,7 +8,6 @@ import com.xahi.reporteddata.model.House;
 import com.xahi.reporteddata.model.Tenant;
 import com.xahi.reporteddata.repository.BuildingRepository;
 import com.xahi.reporteddata.repository.HouseRepository;
-import com.xahi.reporteddata.repository.TenantRepository;
 import com.xahi.reporteddata.util.DataDictionaryConverter;
 import com.xahi.reporteddata.util.StringUtil;
 import com.xahi.reporteddata.util.TimeFormatUtil;
@@ -67,19 +66,19 @@ public class DongguanTenatsConverter {
 
         //获取租客租住房屋
         String houseId = ConstantInterface.HOUSEID_DEFAULT;
-        if (StringUtils.isNotBlank(tenant.getHouseId())){
-            houseId=tenant.getHouseId();
+        if (StringUtils.isNotBlank(tenant.getHouseId())) {
+            houseId = tenant.getHouseId();
         }
         House house = houseRepository.findByHouseId(Long.valueOf(houseId));
-        if (StringUtils.isNotBlank(house.getHouseAddr())) {
-            dongguanTenatsDTO.setFWDZ(house.getHouseAddr());
-        }
-
         Building building = buildingRepository.findByBuildingId(house.getBuildingId());
-        if (building!=null){
+        if (building != null) {
             String buildingCode = building.getBuildingCode();
-            if (StringUtils.isNotBlank(buildingCode)){
+            String fwdz = building.getDetailAddress();
+            if (StringUtils.isNotBlank(buildingCode)) {
                 dongguanTenatsDTO.setFWBH(buildingCode);
+            }
+            if (StringUtils.isNotBlank(fwdz)) {
+                dongguanTenatsDTO.setFWDZ(fwdz);
             }
         }
 
@@ -92,7 +91,7 @@ public class DongguanTenatsConverter {
             dongguanTenatsDTO.setJZFS(tenant.getLiveMode());
         }
 
-        if (tenant.getStartRentDate()!=null){
+        if (tenant.getStartRentDate() != null) {
             dongguanTenatsDTO.setRZSJ(StringUtil.toYYYYMMDD(tenant.getStartRentDate()));
         }
 

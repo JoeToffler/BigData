@@ -8,6 +8,7 @@ import com.xahi.reporteddata.model.*;
 import com.xahi.reporteddata.repository.*;
 import com.xahi.reporteddata.service.*;
 import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;

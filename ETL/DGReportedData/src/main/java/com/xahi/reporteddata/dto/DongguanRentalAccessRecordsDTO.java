@@ -35,7 +35,7 @@ public class DongguanRentalAccessRecordsDTO {
     @Excel(name = "XPXLH",orderNum = "1",width = 15)
     @NotBlank
     @Size(max = 50)
-    private String XPXLH = "XXXX";
+    private String XPXLH = ConstantInterface.XPXLH_DEFAULT;
 
     /**
      * 姓名
@@ -67,7 +67,7 @@ public class DongguanRentalAccessRecordsDTO {
     @Excel(name = "MDMC",orderNum = "5",width = 15)
     @NotBlank
     @Size(max = 100)
-    private String MDMC = "门点名称";
+    private String MDMC = ConstantInterface.NOT_INPUT;
 
     /**
      * 刷卡时间 默认当前时间

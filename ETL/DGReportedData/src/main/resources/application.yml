@@ -1,13 +1,13 @@
 server:
-  port: 8080
+  port: 5000
 
 spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:mysql://localhost:3306/report_data_test?useLegacyDatetimeCode=false&useUnicode=true&characterEncoding=utf8characterSetResults=utf8&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: root
+    url: jdbc:mysql://mysqlhost:3306/test?useLegacyDatetimeCode=false&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    username: test
+    password: test
     initialization-mode: never
   jpa:
     hibernate:
@@ -19,17 +19,17 @@ spring:
     show_sql: false
   data:
     mongodb:
-      uri: mongodb://localhost:27017/report
+      uri: mongodb://mongdbhost:27017/test
 
 dongguan:
   account:
-    accessId: 6
-    accessPwd: 6
+    accessId: a
+    accessPwd: a
   report:
-    url: baidu.com
+    url: bzfw.dg.cn/import/chuzhuwu
 scheduled:
-  houseTime: 0 0 22 * * ?
-  tenantTime: 0 0 23 * * ?
-  authTime: 0 0 23 * * ?
-  recordTime: 0 0 23 * * ?
-  terminalTime: 0 0 23 * * ?
+  houseTime: 0 0 * * * ?
+  tenantTime: 0 10 * * * ?
+  authTime: 0 10 * * * ?
+  recordTime: 0 10 * * * ?
+  terminalTime: 0 10 * * * ?

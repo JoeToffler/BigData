@@ -30,16 +30,17 @@ public class DongguanRentalHouseConverter {
         DongguanRentalHouseDTO dongguanRentalHouseDTO = new DongguanRentalHouseDTO();
         Building building = buildingRepository.findByBuildingId(house.getBuildingId());
         if (building!=null){
+            String fwdz = building.getDetailAddress();
             String buildingCode = building.getBuildingCode();
+            if (StringUtils.isNotBlank(fwdz)) {
+                dongguanRentalHouseDTO.setFWDZ(fwdz);
+            }
             if (StringUtils.isNotBlank(buildingCode)){
                 dongguanRentalHouseDTO.setFWBH(buildingCode);
             }
         }
         if(StringUtils.isNotBlank(house.getPropertyNo())) {
             dongguanRentalHouseDTO.setFWCQZH(house.getPropertyNo());
-        }
-        if (StringUtils.isNotBlank(house.getHouseAddr())) {
-            dongguanRentalHouseDTO.setFWDZ(house.getHouseAddr());
         }
         if (StringUtils.isNotBlank(house.getHouseCode())) {
             dongguanRentalHouseDTO.setBZBH(house.getHouseCode());

@@ -98,7 +98,7 @@ public class DongguanRentalAccessTerminalDTO {
     @Excel(name = "sbb", orderNum = "9", width = 15)
     @NotBlank
     @Size(max = 64)
-    private String sbb = "0";
+    private String sbb = ConstantInterface.SBB_DEFAULT;
 
     /**
      * 品牌？
@@ -120,7 +120,6 @@ public class DongguanRentalAccessTerminalDTO {
 
     /**
      * 标准地址
-     * TODO 从外部接口获得
      */
     @Excel(name = "BZDZ", orderNum = "12", width = 15)
     @NotBlank
@@ -129,7 +128,6 @@ public class DongguanRentalAccessTerminalDTO {
 
     /**
      * 房屋编号     房屋编号，关联房屋信息表FWBH
-     * TODO 从外部接口获得
      */
     @Excel(name = "FWBH", orderNum = "13", width = 15)
     @NotBlank
@@ -138,7 +136,6 @@ public class DongguanRentalAccessTerminalDTO {
 
     /**
      * 门禁类型     1：出租屋，2：小区
-     * TODO 增加画面项目
      */
     @Excel(name = "Type", orderNum = "14", width = 15)
     @NotBlank
@@ -151,10 +148,10 @@ public class DongguanRentalAccessTerminalDTO {
     @Excel(name = "DeleteFlag", orderNum = "14", width = 15)
     @NotBlank
     @Size(max = 1)
-    private String DeleteFlag = TerminalDelete.NOTDELETE.code;
+    private String deleteF = TerminalDelete.NOTDELETE.code;
 
     @Override
     public String toString() {
-        return BH + lockName + isOnline + status + yys_id + azrq + lock_seq + lock_type + sfzx + sbb + dtzb_lat + dtzb_lng + BZDZ + FWBH + type + DeleteFlag;
+        return BH + lockName + isOnline + status + yys_id + azrq + lock_seq + lock_type + sfzx + sbb + dtzb_lat + dtzb_lng + BZDZ + FWBH + type + deleteF;
     }
 }

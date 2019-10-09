@@ -1,6 +1,5 @@
 package com.xahi.reporteddata.converter;
 
-import com.xahi.reporteddata.constants.terminal.OperatorType;
 import com.xahi.reporteddata.dto.DongguanRentalAccessTerminalDTO;
 import com.xahi.reporteddata.model.Building;
 import com.xahi.reporteddata.model.Device;

@@ -1,10 +1,8 @@
 package com.xahi.reporteddata.constants;
 
-import com.xahi.reporteddata.util.StringUtil;
-
 /**
  * @author YangPeng
- * @describe
+ * @describe 默认值常量及字符
  * @date 2019-09-16 15:53
  */
 public interface ConstantInterface {
@@ -24,5 +22,15 @@ public interface ConstantInterface {
     /**
      * house_id默认值
      */
-    String HOUSEID_DEFAULT= "1000001";
+    String HOUSEID_DEFAULT = "1000001";
+
+    /**
+     * sbb  门禁机型号默认值
+     */
+    String SBB_DEFAULT = "0";
+
+    /**
+     * XPXLH    芯片序列号默认值
+     */
+    String XPXLH_DEFAULT = "XXXX";
 }

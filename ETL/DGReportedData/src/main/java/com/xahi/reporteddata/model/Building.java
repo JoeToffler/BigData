@@ -25,7 +25,7 @@ public class Building implements Serializable {
     /**
      * 楼宇编号
      */
-    @Column(name = "buiding_code")
+    @Column(name = "building_code")
     private String buildingCode;
 
     /**

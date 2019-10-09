@@ -9,11 +9,14 @@ public enum IsRegister {
     /**
      * 是否居住登记
      */
-    REGISTER("1"), NOTREGISTER("0");
+    REGISTER("是", "1"), NOTREGISTER("否", "0");
+
+    public String desc;
 
     public String code;
 
-    IsRegister(String code) {
+    IsRegister(String desc, String code) {
+        this.desc = desc;
         this.code = code;
     }
 }

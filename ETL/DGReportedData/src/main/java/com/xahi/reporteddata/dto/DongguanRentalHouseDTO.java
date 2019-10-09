@@ -41,7 +41,7 @@ public class DongguanRentalHouseDTO {
     @Excel(name = "FWDZ", orderNum = "2", width = 15)
     @NotBlank
     @Size(max = 200)
-    private String FWDZ = "标准地址";
+    private String FWDZ = ConstantInterface.NOT_INPUT;
 
     /**
      * 标准地址编号
@@ -61,7 +61,6 @@ public class DongguanRentalHouseDTO {
 
     /**
      * 房号，101，102等
-     * TODO 说明未写长度，暂定64
      */
     @Excel(name = "FJBH", orderNum = "5", width = 15)
     @Size(max = 64)
@@ -75,7 +74,6 @@ public class DongguanRentalHouseDTO {
 
     /**
      * 采集时间     如果数据库没有数据则先使用当前时间
-     * TODO YYYYMMDDHHMISS
      */
     @Excel(name = "CJSJ", orderNum = "7", width = 15)
     @NotBlank

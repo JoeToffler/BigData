@@ -11,6 +11,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
+import static com.xahi.reporteddata.constants.tenats.IsRegister.REGISTER;
+
 /**
  * @author YangPeng
  * @describe 东莞数据平台-出租屋居住人员信息表
@@ -21,7 +23,6 @@ import java.util.Date;
 public class DongguanTenatsDTO {
     /**
      * 编号
-     * TODO tenantId?
      */
     @Excel(name = "BH", width = 15)
     @NotBlank
@@ -47,7 +48,6 @@ public class DongguanTenatsDTO {
     /**
      * 国籍
      * 缺省"中国"
-     * TODO 增加画面项目 字典项请查看附录D
      */
     @Excel(name = "GJ", orderNum = "3", width = 15)
     @NotBlank
@@ -124,11 +124,10 @@ public class DongguanTenatsDTO {
     @Excel(name = "FWDZ", orderNum = "12", width = 15)
     @NotBlank
     @Size(max = 100)
-    private String FWDZ = "未填写";
+    private String FWDZ = ConstantInterface.NOT_INPUT;
 
     /**
      * 房屋编号
-     * TODO 房屋编号，关联房屋信息表FWBH
      */
     @Excel(name = "FWBH", orderNum = "13", width = 15)
     @NotBlank
@@ -153,7 +152,6 @@ public class DongguanTenatsDTO {
 
     /**
      * 入住时间
-     * TODO 格式YYYYMMDD
      */
     @Excel(name = "RZSJ", orderNum = "17", width = 15)
     @NotBlank
@@ -189,12 +187,11 @@ public class DongguanTenatsDTO {
 
     /**
      * 是否居住登记
-     * TODO 增加画面项目
      */
     @Excel(name = "SFJZDJ", orderNum = "21", width = 15)
     @NotBlank
     @Size(max = 64)
-    private String SFJZDJ = "是";
+    private String SFJZDJ = REGISTER.desc;
 
     /**
      * 联系电话1
@@ -202,7 +199,7 @@ public class DongguanTenatsDTO {
     @Excel(name = "LXDH1", orderNum = "22", width = 15)
     @NotBlank
     @Size(max = 50)
-    private String LXDH1 = "未登记";
+    private String LXDH1 = ConstantInterface.NOT_INPUT;
 
     /**
      * 联系电话2
