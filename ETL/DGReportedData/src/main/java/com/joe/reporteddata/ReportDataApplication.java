@@ -9,9 +9,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@SpringBootApplication(scanBasePackages = {"com.xahi"})
+/**
+ * @author JoeToffler
+ */
+@SpringBootApplication(scanBasePackages = {"com.joe"})
 @EnableScheduling
-public class DongguanReporteddataApplication implements ApplicationRunner {
+public class ReportDataApplication implements ApplicationRunner {
 
     @Autowired
     ScheduleTask scheduleTask;
@@ -32,7 +35,7 @@ public class DongguanReporteddataApplication implements ApplicationRunner {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(DongguanReporteddataApplication.class, args);
+        SpringApplication.run(ReportDataApplication.class, args);
     }
 
 }
