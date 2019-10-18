@@ -23,13 +23,13 @@ import java.util.UUID;
 @Service
 public class CommonService {
 
-    @Value("${dongguan.account.accessId}")
+    @Value("${report.account.accessId}")
     private String accessId;
 
-    @Value("${dongguan.account.accessPwd}")
+    @Value("${report.account.accessPwd}")
     private String accessPwd;
 
-    @Value("${dongguan.report.url}")
+    @Value("${report.url}")
     private String url;
 
     public <T> String reportData(List<T> data,String dataFileName,String dataType) throws Exception {

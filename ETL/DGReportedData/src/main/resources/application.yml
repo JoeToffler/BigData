@@ -21,12 +21,11 @@ spring:
     mongodb:
       uri: mongodb://mongdbhost:27017/test
 
-dongguan:
+report:
   account:
     accessId: a
     accessPwd: a
-  report:
-    url: bzfw.dg.cn/import/chuzhuwu
+  url: report.com
 scheduled:
   houseTime: 0 0 * * * ?
   tenantTime: 0 10 * * * ?
