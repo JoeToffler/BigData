@@ -8,11 +8,11 @@
         <version>2.1.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.xahi</groupId>
+    <groupId>com.joe</groupId>
     <artifactId>dgreporteddata</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>dongguan-reporteddata</name>
-    <description>东莞市数据平台接入</description>
+    <version>1.0.0-RELEASE</version>
+    <name>reporteddata</name>
+    <description>数据平台接入</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -66,6 +66,19 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.61</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.5.6</version>
+        </dependency>
+
     </dependencies>
 
     <build>
