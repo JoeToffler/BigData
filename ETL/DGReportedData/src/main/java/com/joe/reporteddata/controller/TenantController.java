@@ -4,6 +4,7 @@ import com.joe.reporteddata.constants.request.DataCollectSystem;
 import com.joe.reporteddata.constants.request.DataType;
 import com.joe.reporteddata.constants.request.PoliceCode;
 import com.joe.reporteddata.converter.TenantsConverter;
+import com.joe.reporteddata.dto.EnumNationalityDTO;
 import com.joe.reporteddata.dto.ReportTenetsDTO;
 import com.joe.reporteddata.dto.PoliceCodeEnumDTO;
 import com.joe.reporteddata.model.Record;
@@ -127,7 +128,7 @@ public class TenantController {
 
     @PostMapping(value = "/excelToEnum")
     public void excelToEnum(@RequestParam("file") MultipartFile file) {
-//        List<NationalityEnumDTO> nationalityEnumDTOS = ExcelWebDownUp.importExcel(file, 0, 1, NationalityEnumDTO.class);
+        List<EnumNationalityDTO> nationalityEnumDTOS = ExcelWebDownUp.importExcel(file, 0, 1, EnumNationalityDTO.class);
         List<PoliceCodeEnumDTO> policeCodeEnumDTOS = ExcelWebDownUp.importExcel(file, 0, 1, PoliceCodeEnumDTO.class);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < policeCodeEnumDTOS.size(); i++) {
